@@ -1,0 +1,9 @@
+{
+  "id": "wechat-filehelper",
+  "channels": ["wechat-filehelper"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

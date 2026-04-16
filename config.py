@@ -49,7 +49,7 @@ class Settings:
     app_name: str = "WeChat FileHelper Protocol Bot"
     version: str = "2.0.0"
     host: str = "0.0.0.0"
-    port: int = 8000
+    port: int = 23051
 
     # === 微信配置 ===
     wechat_entry_host: str = field(

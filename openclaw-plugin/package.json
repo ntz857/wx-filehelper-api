@@ -1,0 +1,32 @@
+{
+  "name": "@openclaw/wechat-filehelper",
+  "version": "1.0.0",
+  "description": "OpenClaw WeChat FileHelper channel plugin",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.7.0"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.3.0"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "openclaw": {
+    "extensions": ["./index.ts"],
+    "channel": {
+      "id": "wechat-filehelper",
+      "label": "WeChat FileHelper",
+      "selectionLabel": "WeChat FileHelper (微信文件助手)",
+      "docsLabel": "wechat-filehelper",
+      "blurb": "Connect OpenClaw to WeChat via FileHelper API.",
+      "order": 80
+    },
+    "install": {
+      "npmSpec": "@openclaw/wechat-filehelper",
+      "defaultChoice": "npm"
+    }
+  }
+}
