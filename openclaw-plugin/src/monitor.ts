@@ -139,9 +139,7 @@ export async function monitorWeChatProvider(opts: MonitorWeChatOpts = {}): Promi
               onError: async (err: any) => {
                 error(`[wechat-filehelper] Reply error: ${String(err)}`);
               },
-              onIdle: async () => {
-                markDispatchIdle?.();
-              },
+              onIdle: async () => {},
               onCleanup: () => {},
             });
 

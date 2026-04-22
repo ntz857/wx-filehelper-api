@@ -1,0 +1,29 @@
+# Build OpenClaw image with wx-filehelper-api plugin pre-installed
+#
+# Prerequisites: build the base OpenClaw image first:
+#   cd /path/to/openclaw && DOCKER_BUILDKIT=1 docker build -t openclaw:local .
+
+ARG OPENCLAW_BASE_IMAGE=openclaw:local
+FROM ${OPENCLAW_BASE_IMAGE}
+
+USER root
+
+# Copy plugin source into the image
+COPY openclaw-plugin /app/plugins/wechat-filehelper
+
+# Install plugin dependencies
+RUN cd /app/plugins/wechat-filehelper && npm install --omit=dev
+
+# Ensure correct ownership
+RUN chown -R node:node /app/plugins/wechat-filehelper
+
+# Pre-register the plugin in OpenClaw config.
+# On first start, if no config volume is mounted, this provides defaults.
+# The entrypoint script merges plugin registration into openclaw.json.
+COPY deploy/register-plugin.sh /app/register-plugin.sh
+RUN chmod +x /app/register-plugin.sh
+
+USER node
+
+# Wrap the original entrypoint to register plugin before starting gateway
+ENTRYPOINT ["/bin/sh", "-c", "/app/register-plugin.sh && exec node openclaw.mjs gateway --allow-unconfigured --bind ${OPENCLAW_GATEWAY_BIND:-lan}"]

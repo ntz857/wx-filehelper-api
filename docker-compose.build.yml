@@ -1,0 +1,11 @@
+# 本地构建用
+# Usage: docker compose -f docker-compose.build.yml build
+
+services:
+  openclaw-wx-filehelper:
+    image: openclaw-wx-filehelper:latest
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.allinone
+      additional_contexts:
+        openclaw-src: ${OPENCLAW_SRC_DIR:-../openclaw/openclaw}
